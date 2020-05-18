@@ -34,7 +34,10 @@ const DUMMY_PLACES = [
         description: 'Description',
         address: 'London',
         creator: 'u2',
-        location: '1111',
+        location: {
+            lat: 55.7520233,
+            lng: 37.6174994
+        },
         imageUrl: 'https://picsum.photos/1200/1300',
     }
 ]
