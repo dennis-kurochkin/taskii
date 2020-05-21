@@ -1,107 +1,106 @@
-# App overview
+# Start package for [Bulma](http://bulma.io)
 
-## Planning steps
+Tiny npm package that includes the `npm` **dependencies** you need to **build your own website** with Bulma.
 
-* [x] Come up with an idea / problem to solve
-* [x] Create design / sketch
-* [x] Plan data models, data you'll work with
-* [x] Plan endpoints (API, backend)
-* [x] Plan routes (SPA, frontend)
+<a href="http://bulma.io"><img src="https://raw.githubusercontent.com/jgthms/bulma-start/master/bulma-start.png" alt="Bulma: a Flexbox CSS framework" style="max-width:100%;" width="600" height="315"></a>
 
----
+## Install
 
-## Gegeral Idea
+```sh
+npm install bulma-start
+```
+_or_
 
-* Create an app, that lets managers to add, edit and remove tasks for users and store tasks in the projects, give them due date, title, description and attach files. 
-* App also provide administration functional for only technical administrators, where they can add, edit and remove administrators, managers and users of this app.
-* Users can see all the tasks attached for them and complete them
-* Authentication and Authorization
+```sh
+yarn add bulma-start
+```
 
-## Design
+## What's included
 
-[Figma Design](https://www.figma.com/file/0votXC43Q5KC5scZjQZ40S/Taskii?node-id=0%3A1)
+The `npm` dependencies included in `package.json` are:
 
-## Data models
+* <code>[bulma](https://github.com/jgthms/bulma)</code>
+* <code>[node-sass](https://github.com/sass/node-sass)</code> to compile your own Sass file
+* <code>[postcss-cli](https://github.com/postcss/postcss-cli)</code> and <code>[autoprefixer](https://github.com/postcss/autoprefixer)</code> to add support for older browsers
+* <code>[babel-cli](https://babeljs.io/docs/usage/cli/)</code>, <code>[babel-preset-env](https://github.com/babel/babel-preset-env)</code> and <code>[babel-preset-es2015-ie](https://github.com/jmcriffey/babel-preset-es2015-ie)</code> for compiling ES6 JavaScript files
 
-| User     | === | Project | === | Task        |
-| -------- | --- | ------- | --- | ----------- |
-| ID       | === | ID      | === | ID          |
-| Email    | === | Title   | === | Project ID  |
-| Name     | === |         | === | Title       |
-| Surname  | === |         | === | Description |
-| Password | === |         | === | Asignee     |
-| Role     | === |         | === | Due Date    |
-|          | === |         | === | Files[]     |
+Apart from `package.json`, the following files are included:
 
-## API Endpoints
+* `.babelrc` configuration file for [Babel](https://babeljs.io/)
+* `.gitignore` common [Git](https://git-scm.com/) ignored files
+* `index.html` this HTML5 file
+* `_sass/main.scss` a basic SCSS file that **imports Bulma** and explains how to **customize** your styles, and compiles to `css/main.css`
+* `_javascript/main.js` an ES6 JavaScript that compiles to `lib/main.js`
 
-### Users
 
-> /api/users/..
+## Get your feet wet
 
-**GET ../**<br>
-Retrieve list of all users
+This package is meant to provide a **good starting point** for working with Bulma.
 
-**POST ../signup**<br>
-Create new user + log user in
+When installing this package with the commands above, it landed in `$HOME/node_packages/bulma-start`.
+In order to use it as a **template** for your **project**, you might consider copying it to a better suited location:
 
-**POST ../login**<br>
-Log user in
+```sh
+cd $HOME/projects
+cp -a $HOME/node_modules/bulma-start my-bulma-project
+```
 
-### Projects
+Alternatively, you could do something similar with a GitHub clone as well.
 
-> /api/projects/..
+```sh
+cd $HOME/projects
+git clone https://github.com/jgthms/bulma-start
+mv bulma-start my-bulma-project
+rm -rf my-bulma-project/.git     # cut its roots
+```
 
-**GET ../**<br>
-Retrieve list of all projects
+Now, that you prepared the groundwork for your project, set up Bulma and run the watchers:
 
-**GET ../:pid**<br>
-Retrieve project with id (pid)
+```sh
+cd my-bulma-project
+npm install
+npm start
+```
 
-**POST ../**<br>
-Create new project
+As long as `npm start` is running, it will **watch** your changes. You can edit `_sass/main.scss` and `_javascript/main.js` at will. Changes are **immediately** compiled to their destinations, where `index.html` will pick them up upon reload in your browser.
 
-**PATCH ../:pid**<br>
-Update project with id (pid)
+Some controlling output is written to the `npm start` console in that process:
 
-**DELETE ../:pid**<br>
-Delete project with id (pid)
+```sh
+_javascript/main.js -> lib/main.js
 
-### Tasks
+=> changed: $HOME/projects/start-with-bulma/_sass/main.scss
+Rendering Complete, saving .css file...
+Wrote CSS to $HOME/projects/start-with-bulma/css/main.css
+```
 
-> /api/tasks/..
+Use `npm run` to show all available commands:
 
-**GET ../user/:uid**<br>
-Retrieve list of all tasks for the user by id (uid)
+```sh
+Lifecycle scripts included in bulma-start:
+  start
+    npm-run-all --parallel css-watch js-watch
 
-**GET ../project/:pid**<br>
-Retrieve list of all tasks for the project by id (pid)
+available via `npm run-script`:
+  css-build
+    node-sass _sass/main.scss css/main.css
+  css-deploy
+    npm run css-build && npm run css-postcss
+  css-postcss
+    postcss --use autoprefixer --output css/main.css css/main.css
+  css-watch
+    npm run css-build -- --watch
+  deploy
+    npm run css-deploy && npm run js-build
+  js-build
+    babel _javascript --out-dir lib
+  js-watch
+    npm run js-build -- --watch
+```
 
-**GET ../:tid**<br>
-Retrieve task with id (tid)
+If you want to learn more, follow these links: [Bulma homepage](http://bulma.io) and [Documentation](http://bulma.io/documentation/overview/start/).
 
-**POST ../**<br>
-Create new task
 
-**PATCH ../:tid**<br>
-Update task with id (tid)
+## Copyright and license
 
-**DELETE ../:tid**<br>
-Delete task with id (tid)
-
-## SPA Routes
-
-| Route            | View                     | User Role         |
-| ---------------- | ------------------------ | ----------------- |
-| /                | Log in                   | Not Authenticated |
-| /users           | List of users            | Administrator     |
-| /users/add       | Add user                 | Administrator     |
-| /users/:uid      | Update user              | Administrator     |
-| /projects        | List of projects         | Manager           |
-| /projects/new    | Add project              | Manager           |
-| /projects/:pid   | Edit project             | Manager           |
-| /:pid/tasks      | List of tasks by project | Manager           |
-| /:pid/tasks/new  | New task                 | Manager           |
-| /:pid/tasks/:tid | Update task              | Manager           |
-| /:uid/tasks      | List of Tasks by user    | User              |
-| /tasks/:tid      | Task view                | User              |
+Code copyright 2017 Jeremy Thomas. Code released under [the MIT license](https://github.com/jgthms/bulma-start/blob/master/LICENSE).

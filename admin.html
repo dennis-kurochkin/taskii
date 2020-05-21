@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Администратор</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <header class="header panel">
+        <div class="container is-fluid">
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title">Taskii</h1>
+                    <h2 class="subtitle">Такс-менеджер для веб-студии A7</h2>
+                </div>
+                <div class="column is-flex" style="justify-content: flex-end; align-items: center;">
+                    <p style="margin-right: 25px;">Вы вошли как <strong>Денис Курочкин</strong></p>
+                    <a href="" class="button is-danger">Выйти</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="layout">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-one-quarter aside">
+                    <nav class="panel">
+                        <a class="panel-block is-active">
+                            <span class="panel-icon">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                            </span>
+                            Пользователи
+                        </a>
+                        <a class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fas fa-folder" aria-hidden="true"></i>
+                            </span>
+                            Проекты
+                        </a>
+                    </nav>
+                </div>
+                <div class="column main">
+                    <div class="row" style="margin-bottom: 20px;">
+                        <a href="" class="button is-medium is-link is-light">Добавить пользователя</a>
+                    </div>
+                    <div class="box">
+                        <table class="table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Роль</th>
+                                    <th>Email</th>
+                                    <th>ФИО</th>
+                                    <th>Пароль</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <td>Администратор</td>
+                                    <td>mail@mail.ru</td>
+                                    <td>Иванов Иван Иванович</td>
+                                    <td><a href="">Изменить</a></td>
+                                    <td>
+                                        <a href="" class="button is-link">
+                                            <i class="fas fa-user-edit"></i>
+                                        </a>
+                                        <a href="" class="button is-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>2</th>
+                                    <td>Сотрудник</td>
+                                    <td>mail@mail.ru</td>
+                                    <td>Курочкин Денис Александрович</td>
+                                    <td><a href="">Изменить</a></td>
+                                    <td>
+                                        <a href="" class="button is-link">
+                                            <i class="fas fa-user-edit"></i>
+                                        </a>
+                                        <a href="" class="button is-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script type="text/javascript" src="lib/main.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+</body>
+
+</html>
