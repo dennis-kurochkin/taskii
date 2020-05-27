@@ -45,20 +45,25 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
+
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} {{ Auth::user()->surname }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+
+                            <a
+                                class="dropdown-item"
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+
                                 {{ __('Выйти') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
+
                         </div>
                     </li>
                 @endguest
@@ -73,7 +78,8 @@
                             @auth
                                 @if(Auth::user()->isAdmin())
                                     <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('users') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                                        <a class="nav-link {{ request()->is('users*') || request()->routeIs('register') ? 'active' : '' }}"
+                                            href="{{ route('users.index') }}">
                                             <i class="fas fa-user"></i>
                                             Пользователи
                                         </a>
@@ -81,13 +87,13 @@
                                 @endif
                                 @if(Auth::user()->isManager())
                                     <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('stats') ? 'active' : '' }}" href="{{ route('stats.index') }}">
+                                        <a class="nav-link {{ request()->is('stats*') ? 'active' : '' }}" href="{{ route('stats.index') }}">
                                             <i class="fas fa-chart-line"></i>
                                             Статистика
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('projects') ? 'active' : '' }}" href="{{ route('projects.index') }}">
+                                        <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="{{ route('projects.index') }}">
                                             <i class="fas fa-folder"></i>
                                             Проекты
                                         </a>
@@ -95,7 +101,7 @@
                                 @endif
                                 @if(Auth::user()->isEmployee())
                                     <li class="nav-item">
-                                        <a class="nav-link {{ Request::is('tasks') ? 'active' : '' }}" href="{{ route('tasks.index') }}">
+                                        <a class="nav-link {{ request()->is('tasks*') ? 'active' : '' }}" href="{{ route('tasks.index') }}">
                                             <i class="fas fa-list"></i>
                                             Мои задачи
                                         </a>
@@ -103,7 +109,7 @@
                                 @endif
                             @endauth
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is('help') ? 'active' : '' }}" href="{{ route('help.index') }}">
+                                <a class="nav-link {{ request()->is('help*') ? 'active' : '' }}" href="{{ route('help.index') }}">
                                     <i class="fas fa-question-circle"></i>
                                     Помощь по системе
                                 </a>
@@ -122,7 +128,7 @@
                                         <a href="{{ route('projects.create') }}" class="btn btn-sm btn-outline-secondary">Добавить проект</a>
                                     @endif
                                     @if(Auth::user()->isAdmin())
-                                        <a href="{{ route('users.create') }}" class="btn btn-sm btn-outline-secondary">Добавить пользователя</a>
+                                        <a href="{{ route('register') }}" class="btn btn-sm btn-outline-secondary">Добавить пользователя</a>
                                     @endif
                                 @endauth
                             </div>

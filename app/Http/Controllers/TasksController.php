@@ -46,9 +46,9 @@ class TasksController extends Controller
     public function create()
     {
         return view('tasks.create', [
-            'title' => 'Создать задачу',
+            'title' => 'Добавить задачу',
             'projects' => Project::all(),
-            'users' => User::all(),
+            'users' => User::where('role', 'employee')->get()
         ]);
     }
 

@@ -27,8 +27,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('projects.create', [
-            'title' => 'Новый проект'
+        return view('users.create', [
+            'title' => 'Новый пользователь'
         ]);
     }
 
@@ -39,25 +39,11 @@ class UsersController extends Controller
      */
     public function store()
     {
-        $project = new Project($this->validateProject());
-        $project->save();
+
 
         return redirect(route('projects.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        return view('projects.show', [
-            'title' => 'Проект',
-            'project' => $project
-        ]);
-    }
 
     /**
      * Show the form for editing the specified resource.
