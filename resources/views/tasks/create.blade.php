@@ -2,7 +2,7 @@
 
 @section('content')
 
-@if($users->count() > 0 && $projects0>count())
+@if($users->count() > 0 && $projects->count() > 0)
 
     <form method="POST" action="{{ route('tasks.store') }}">
         @csrf

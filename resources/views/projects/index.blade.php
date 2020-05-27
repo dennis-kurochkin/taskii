@@ -3,37 +3,33 @@
 @section('content')
 
 @if(count($projects) > 0)
-    <table class="table table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Название</th>
-                <th scope="col">Описание</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($projects as $project)
-                <tr>
-                    <th scope="row">{{ $project->id }}</th>
-                    <td>{{ $project->title }}</td>
-                    <td>{{ $project->description }}</td>
-                    <td>
-                        <form action="{{ url('projects/' . $project->id) }}" method="POST">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
+    <div class="list-group shadow-sm">
+        @foreach($projects as $project)
+            <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                    <h4 class="mb-1 font-weight-bold">{{ $project->title }}</h4>
+                </div>
+                @if($project->description)
+                    <p class="mb-1 lead">{{ $project->description }}</p>
+                @endif
+                <p class="m-0"><strong>Задач: </strong></p>
+                <div class="mt-2">
+                    <a href="{{ route('projects.tasks.index', $project) }}" class="btn btn-sm btn-primary">Управление задачами</a>
+                    <a href="{{ route('projects.edit', $project) }}" class="btn btn-sm btn-secondary">Редактировать</a>
+                    <form action="{{ route('projects.destroy', $project) }}" method="POST" class="d-inline">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
 
-                            <button type="submit" id="delete-task-{{ $project->id }}" class="btn btn-danger">
-                                <i class="fa fa-btn fa-trash"></i> Удалить
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+                        <button type="submit" id="delete-project-{{ $project->id }}" class="btn btn-sm btn-danger">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @else
-    <p>Проектов пока еще нет.</p>
+    <div class="alert alert-primary" role="alert">
+        Проектов в системе на найдено. <a href="{{ route('projects.create') }}">Создайте новый!</a>
+    </div>
 @endif
 
 @endsection
