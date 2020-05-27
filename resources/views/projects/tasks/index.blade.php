@@ -11,11 +11,11 @@
     @endif
     <p class="m-0"><strong>Задач: </strong></p>
     <div class="mt-2">
+        <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-success">Добавить задачу</a>
         <a href="{{ route('projects.edit', $project) }}" class="btn btn-sm btn-secondary">Редактировать</a>
         <form action="{{ route('projects.destroy', $project) }}" method="POST" class="d-inline">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
-
             <button type="submit" id="delete-project-{{ $project->id }}" class="btn btn-sm btn-danger">Удалить</button>
         </form>
     </div>
@@ -28,9 +28,20 @@
                 <div class="list-group-item">
                     <div class="row">
                         <div class="col-auto pr-0">
-                            <a href="#" class="btn btn-outline-success" title="Выполнить">
-                                <i class="fa fas fa-check"></i>
-                            </a>
+                            @if($task->completed_at)
+                                <button type="button" class="btn btn-success disabled" title="Выполнено" disabled>
+                                    <i class="fa fas fa-check"></i>
+                                </button>
+                            @else
+                                <form action="{{ route('projects.tasks.update', [$project, $task]) }}" method="POST" class="d-inline">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
+                                    <input type="hidden" name="type" value="complete">
+                                    <button type="submit" class="btn btn-outline-success" title="Выполнить">
+                                        <i class="fa fas fa-check"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                         <div class="col">
                             <div class="d-flex w-100 justify-content-between">
@@ -40,11 +51,10 @@
                             @if($task->description)
                                 <p class="mb-1">{{ $task->description }}</p>
                             @endif
-                            <p class="m-0"><small><strong>Проект: </strong>{{ $task->project->title }}</small></p>
                             <p class="m-0"><small><strong>Исполнитель: </strong>{{ "{$task->user->name} {$task->user->surname}, {$task->user->email}" }}</small></p>
                             <div class="mt-2">
-                                <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-primary">Редактировать</a>
-                                <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
+                                <a href="{{ route('projects.tasks.edit', [$project, $task]) }}" class="btn btn-sm btn-primary">Редактировать</a>
+                                <form action="{{ route('projects.tasks.destroy', [$project, $task]) }}" method="POST" class="d-inline">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
@@ -59,7 +69,7 @@
     </div>
 @else
     <div class="alert alert-primary" role="alert">
-        Задач для проекта еще не создано. <a href="{{  }}">Создать?</a>
+        Задач для проекта еще не создано. <a href="{{ route('projects.tasks.create', $project) }}">Создать?</a>
     </div>
 @endif
 

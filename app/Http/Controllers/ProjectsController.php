@@ -67,7 +67,10 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit', [
+            'title' => "Редактировать проект \"{$project->title}\"",
+            'project' => $project
+        ]);
     }
 
     /**
@@ -77,9 +80,11 @@ class ProjectsController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Project $project)
     {
-        //
+        $project->update($this->validateProject());
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -92,13 +97,16 @@ class ProjectsController extends Controller
     {
         $project->delete();
 
-        return redirect(route('projects.index'));
+        return redirect()->route('projects.index');
     }
 
+    /**
+     * Validate a project
+     */
     public function validateProject()
     {
         return request()->validate([
-            'title' => 'required|min:3|max:255|unique:projects,title',
+            'title' => 'required|min:3|max:255',
             'description' => 'max:511'
         ]);
     }

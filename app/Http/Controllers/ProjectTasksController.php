@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\Task;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProjectTasksController extends Controller
@@ -20,6 +21,7 @@ class ProjectTasksController extends Controller
             'title' => "Задачи проекта {$project->title}",
             'project' => $project,
             'tasks' => $project->tasks
+                ->sortBy('completed_at')
         ]);
     }
 
@@ -32,6 +34,7 @@ class ProjectTasksController extends Controller
     {
         return view('projects.tasks.create', [
             'title' => "Добавить задачу для проекта {$project->title}",
+            'project' => $project,
             'users' => User::where('role', 'employee')->get()
         ]);
     }
@@ -42,13 +45,15 @@ class ProjectTasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Project $project)
     {
         $task = new Task($this->validateTask());
 
+        $task->project_id = $project->id;
+
         $task->save();
 
-        return back();
+        return redirect()->route('projects.tasks.index', $project);
     }
 
     /**
@@ -57,9 +62,14 @@ class ProjectTasksController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit(Project $project, Task $task)
     {
-        //
+        return view('projects.tasks.edit', [
+            'title' => "Редактировать задачу \"{$task->title}\" для проекта \"{$project->title}\"",
+            'project' => $project,
+            'users' => User::where('role', 'employee')->get(),
+            'task' => $task
+        ]);
     }
 
     /**
@@ -69,9 +79,15 @@ class ProjectTasksController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Project $project, Task $task)
     {
-        //
+        if (request('type') === 'complete') {
+            $task->update(['completed_at' => Carbon::now()]);
+        } else {
+            $task->update($this->validateTask());
+        }
+
+        return redirect()->route('projects.tasks.index', $project);
     }
 
     /**
@@ -80,7 +96,7 @@ class ProjectTasksController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Project $project, Task $task)
     {
         $task->delete();
 
@@ -93,13 +109,12 @@ class ProjectTasksController extends Controller
 
     protected function validateTask()
     {
-        // dd(request());
         return request()->validate([
             'title' => 'required|min:3|max:255',
-            'project_id' => 'required|exists:projects,id',
             'user_id' => 'required|exists:users,id',
             'description' => 'max:511',
             'due_date' => 'required|date|after_or_equal:today',
+            'completed_at' => 'after_or_equal:due_date',
             'priority' => 'required|min:1'
         ]);
     }

@@ -18,7 +18,7 @@
 
     <div class="form-group">
         <label for="description">Описание</label>
-        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="8" placeholder="Краткое описание проекта для понимания специфики задач"></textarea>
+        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="8" placeholder="Краткое описание проекта для понимания специфики задач">{{ old('description') }}</textarea>
 
         @error('description')
             <span class="invalid-feedback" role="alert">

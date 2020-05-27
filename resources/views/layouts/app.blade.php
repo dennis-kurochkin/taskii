@@ -124,6 +124,9 @@
                             <div class="btn-group mr-2">
                                 @auth
                                     @if(Auth::user()->isManager())
+                                        @isset($project)
+                                            <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-outline-secondary">Добавить задачу</a>
+                                        @endisset
                                         <a href="{{ route('projects.create') }}" class="btn btn-sm btn-outline-secondary">Добавить проект</a>
                                     @endif
                                     @if(Auth::user()->isAdmin())

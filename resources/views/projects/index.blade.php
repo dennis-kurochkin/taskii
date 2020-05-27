@@ -14,6 +14,7 @@
                 @endif
                 <p class="m-0"><strong>Задач: </strong></p>
                 <div class="mt-2">
+                    <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-success">Добавить задачу</a>
                     <a href="{{ route('projects.tasks.index', $project) }}" class="btn btn-sm btn-primary">Управление задачами</a>
                     <a href="{{ route('projects.edit', $project) }}" class="btn btn-sm btn-secondary">Редактировать</a>
                     <form action="{{ route('projects.destroy', $project) }}" method="POST" class="d-inline">

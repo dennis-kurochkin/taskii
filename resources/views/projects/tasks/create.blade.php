@@ -2,9 +2,9 @@
 
 @section('content')
 
-@if($users->count() > 0 && $projects->count() > 0)
+@if($users->count() > 0)
 
-    <form method="POST" action="{{ route('tasks.store') }}">
+    <form method="POST" action="{{ route('projects.tasks.store', $project) }}">
         @csrf
 
         <div class="form-group">
@@ -19,29 +19,6 @@
                 required>
 
             @error('title')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="project_id">Проект *</label>
-            <select
-                name="project_id"
-                class="form-control @error('project_id') is-invalid @enderror"
-                id="project_id"
-                required>
-
-                <option value="">Выберите</option>
-
-                @foreach($projects as $project)
-                    <option value="{{ $project->id }}">{{ $project->title }}</option>
-                @endforeach
-
-            </select>
-
-            @error('project_id')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -94,9 +71,7 @@
                 name="description"
                 class="form-control @error('description') is-invalid @enderror"
                 id="description"
-                rows="8">
-            {{ old('description') }}
-        </textarea>
+                rows="8">{{ old('description') }}</textarea>
 
             @error('description')
                 <span class="invalid-feedback" role="alert">
@@ -134,7 +109,7 @@
 
 @else
     <div class="alert alert-danger" role="alert">
-        Для создания задачи, необходимо добавить сотрудников и проекты!
+        Для создания задачи необходимо добавить сотрудников в систему.
     </div>
 @endif
 

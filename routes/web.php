@@ -33,11 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/projects/{project}', 'ProjectsController@update')->name('projects.update');
 
     Route::get('/projects/{project}/tasks', 'ProjectTasksController@index')->name('projects.tasks.index');
-    Route::post('/projects/tasks', 'ProjectTasksController@store')->name('tasks.store');
+    Route::post('/projects/{project}/tasks', 'ProjectTasksController@store')->name('projects.tasks.store');
     Route::get('/projects/{project}/tasks/create', 'ProjectTasksController@create')->name('projects.tasks.create');
-    Route::delete('/projects/tasks/{task}', 'ProjectTasksController@destroy')->name('projects.tasks.destroy');
-    Route::get('/projects/tasks/{task}/edit', 'ProjectTasksController@edit')->name('projects.tasks.edit');
-    Route::put('/projects/tasks/{task}', 'ProjectTasksController@update')->name('projects.tasks.update');
+    Route::delete('/projects/{project}/tasks/{task}', 'ProjectTasksController@destroy')->name('projects.tasks.destroy');
+    Route::get('/projects/{project}/tasks/{task}/edit', 'ProjectTasksController@edit')->name('projects.tasks.edit');
+    Route::put('/projects/{project}/tasks/{task}', 'ProjectTasksController@update')->name('projects.tasks.update');
 
 
     Route::get('/tasks', 'TasksController@index')->name('tasks.index');
