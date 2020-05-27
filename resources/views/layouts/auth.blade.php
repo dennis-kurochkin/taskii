@@ -26,7 +26,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-dark sticky-top navbar-expand-lg justify-content-center bg-dark flex-md-nowrap p-0 shadow">
-            <a class="navbar-brand mr-0 px-3" href="{{ url('/') }}"> {{ config('app.name', 'Веб-студия A7') }}</a>
+            <p class="navbar-brand m-0 px-3"> {{ config('app.name', 'Веб-студия A7') }}</p>
         </nav>
         <main class="py-4">
             @yield('content')

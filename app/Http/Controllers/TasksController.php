@@ -24,4 +24,17 @@ class TasksController extends Controller
             'tasks' => Auth::user()->tasks->sortBy('due_date')
         ]);
     }
+    /**
+     * Update the user's task.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function update()
+    {
+        return view('tasks.index', [
+            'title' => 'Задачи',
+            'tasks' => Auth::user()->tasks->sortBy('due_date')
+        ]);
+    }
 }
