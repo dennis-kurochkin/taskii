@@ -93,6 +93,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link {{ request()->is('calendar*') ? 'active' : '' }}" href="{{ route('calendar.index') }}">
+                                            <i class="fas fa-chart-line"></i>
+                                            Календарь
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="{{ route('projects.index') }}">
                                             <i class="fas fa-folder"></i>
                                             Проекты

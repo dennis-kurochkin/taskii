@@ -114,6 +114,6 @@ class RegisterController extends Controller
 
         return $request->wantsJson()
             ? new Response('', 201)
-            : back();
+            : redirect()->route('users.index');
     }
 }

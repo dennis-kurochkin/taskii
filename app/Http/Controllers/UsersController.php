@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -21,31 +22,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('users.create', [
-            'title' => 'Новый пользователь'
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-
-
-        return redirect(route('projects.index'));
-    }
-
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Project  $project
@@ -53,7 +29,10 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', [
+            'title' => 'Редактировать пользователя',
+            'user' => $user
+        ]);
     }
 
     /**
@@ -63,9 +42,14 @@ class UsersController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
-        //
+        $data = $this->validateUser($user);
+        $data['password'] = Hash::make($data['password']);
+
+        $user->update($data);
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -81,11 +65,14 @@ class UsersController extends Controller
         return redirect(route('users.index'));
     }
 
-    public function validateProject()
+    public function validateUser(User $user)
     {
         return request()->validate([
-            'title' => 'required|min:3|max:255|unique:projects,title',
-            'description' => 'max:511'
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'in:admin,manager,employee'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,id,' . $user->id],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 }

@@ -74,7 +74,7 @@
 @endif
 
 <div class="d-flex mt-3 justify-content-end">
-    <a href="{{ url()->previous() }}" class="btn btn-lg btn-secondary">Назад</a>
+    <a href="{{ route('projects.index', $project) }}" class="btn btn-lg btn-secondary">Назад</a>
 </div>
 
 @endsection

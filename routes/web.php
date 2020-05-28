@@ -20,15 +20,19 @@ Auth::routes();
 
 Route::get('/help', 'HelpController@index')->name('help.index')->middleware('auth');
 
-Route::middleware(['auth', 'admin'])->group(function () {
 
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users', 'UsersController@index')->name('users.index');
     Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
+    Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+    Route::put('/users/{user}', 'UsersController@update')->name('users.update');
 });
 
-Route::middleware(['auth', 'manager'])->group(function () {
 
+Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/stats', 'StatsController@index')->name('stats.index');
+
+    Route::get('/calendar', 'CalendarController@index')->name('calendar.index');
 
     Route::get('/projects', 'ProjectsController@index')->name('projects.index');
     Route::post('/projects', 'ProjectsController@store')->name('projects.store');
@@ -44,6 +48,7 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/projects/{project}/tasks/{task}/edit', 'ProjectTasksController@edit')->name('projects.tasks.edit');
     Route::put('/projects/{project}/tasks/{task}', 'ProjectTasksController@update')->name('projects.tasks.update');
 });
+
 
 Route::middleware(['auth', 'employee'])->group(function () {
 

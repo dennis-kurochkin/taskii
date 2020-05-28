@@ -26,17 +26,21 @@
         </div>
 
         <div class="form-group">
-            <label for="user_id">Исполнитель *</label>
+            <label for="user_id">Исполнитель*</label>
             <select
                 name="user_id"
                 class="form-control @error('user_id') is-invalid @enderror"
                 id="user_id"
                 required>
 
-                <option value=""> Выберите</option>
+                <option value="">Выберите</option>
 
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }} {{ $user->surname }} | {{ $user->email }}</option>
+                    <option
+                    value="{{ $user->id }}"
+                    @if($user->id == old('user_id')) selected @endif>
+                    {{ $user->name }} {{ $user->surname }} | {{ $user->email }}
+                </option>
                 @endforeach
 
             </select>
@@ -89,9 +93,9 @@
                 required>
 
                 <option value="">Выберите</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="1" {{ old('priority') === '1' ? 'selected' : '' }}>1</option>
+                <option value="2" {{ old('priority') === '2' ? 'selected' : '' }}>2</option>
+                <option value="3" {{ old('priority') === '3' ? 'selected' : '' }}>3</option>
 
             </select>
 

@@ -12,7 +12,6 @@
                 @if($project->description)
                     <p class="mb-1 lead">{{ $project->description }}</p>
                 @endif
-                <p class="m-0"><strong>Задач: </strong></p>
                 <div class="mt-2">
                     <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-success">Добавить задачу</a>
                     <a href="{{ route('projects.tasks.index', $project) }}" class="btn btn-sm btn-primary">Управление задачами</a>
