@@ -45,6 +45,14 @@ class User extends Authenticatable
         return $this->hasMany(Task::class);
     }
 
+    /**
+     * Get all of the tasks for the user.
+     */
+    public function completedTasks()
+    {
+        return $this->hasMany(Task::class)->whereNotNull('completed_at');
+    }
+
     public function isAdmin()
     {
         return $this->role === 'admin';

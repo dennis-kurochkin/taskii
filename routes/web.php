@@ -32,8 +32,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/stats', 'StatsController@index')->name('stats.index');
 
-    Route::get('/calendar', 'CalendarController@index')->name('calendar.index');
-
     Route::get('/projects', 'ProjectsController@index')->name('projects.index');
     Route::post('/projects', 'ProjectsController@store')->name('projects.store');
     Route::get('/projects/create', 'ProjectsController@create')->name('projects.create');

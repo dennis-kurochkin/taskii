@@ -89,13 +89,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link {{ request()->is('stats*') ? 'active' : '' }}" href="{{ route('stats.index') }}">
                                             <i class="fas fa-chart-line"></i>
-                                            Статистика
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ request()->is('calendar*') ? 'active' : '' }}" href="{{ route('calendar.index') }}">
-                                            <i class="fas fa-chart-line"></i>
-                                            Календарь
+                                            Аналитика
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -130,9 +124,9 @@
                             <div class="btn-group mr-2">
                                 @auth
                                     @if(Auth::user()->isManager())
-                                        @isset($project)
-                                            <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-outline-secondary">Добавить задачу</a>
-                                        @endisset
+                                        @if(isset($project) && !isset($projects))
+                                            <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-outline-secondary">Добавить задачу для проекта</a>
+                                        @endif
                                         <a href="{{ route('projects.create') }}" class="btn btn-sm btn-outline-secondary">Добавить проект</a>
                                     @endif
                                     @if(Auth::user()->isAdmin())
