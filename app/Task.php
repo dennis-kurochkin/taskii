@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -27,5 +28,29 @@ class Task extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * Get comments that belongs to the task
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Check if task overdue
+     */
+    public function isOverdue()
+    {
+        return $this->due_date < Carbon::today()->toDateString();
+    }
+
+    /**
+     * Check if task overdue
+     */
+    public function isCompleted()
+    {
+        return !is_null($this->completed_at);
     }
 }
