@@ -77,40 +77,81 @@
                         <ul class="nav flex-column">
                             @auth
                                 @if(Auth::user()->isAdmin())
+                                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-2 text-muted">
+                                        <span>Управление</span>
+                                    </h6>
                                     <li class="nav-item">
                                         <a class="nav-link {{ request()->is('users*') || request()->routeIs('register') ? 'active' : '' }}"
                                             href="{{ route('users.index') }}">
-                                            <i class="fas fa-user"></i>
+                                            <i class="fas fa-user mr-2"></i>
                                             Пользователи
                                         </a>
                                     </li>
                                 @endif
                                 @if(Auth::user()->isManager())
+                                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-2 text-muted">
+                                        <span>Инструменты</span>
+                                    </h6>
                                     <li class="nav-item">
                                         <a class="nav-link {{ request()->is('stats*') ? 'active' : '' }}" href="{{ route('stats.index') }}">
-                                            <i class="fas fa-chart-line"></i>
+                                            <i class="fas fa-chart-line mr-2"></i>
                                             Аналитика
                                         </a>
                                     </li>
+                                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-2 text-muted">
+                                        <span>Управление</span>
+                                    </h6>
                                     <li class="nav-item">
                                         <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="{{ route('projects.index') }}">
-                                            <i class="fas fa-folder"></i>
+                                            <i class="fas fa-folder mr-2"></i>
                                             Проекты
                                         </a>
                                     </li>
+                                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-2 text-muted">
+                                        <span>Отчеты</span>
+                                    </h6>
+                                    <ul class="nav flex-column mb-2">
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex" href="#">
+                                                <i class="fas fa-file-alt mt-1 mr-2"></i>
+                                                Незавершенные задачи,<br>
+                                                затянувшиеся по срокам
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex" href="#">
+                                                <i class="fas fa-file-alt mt-1 mr-2"></i>
+                                                Задачи, завершенные<br>
+                                                на этой неделе
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex" href="#">
+                                                <i class="fas fa-file-alt mt-1 mr-2"></i>
+                                                Завершение задач:<br>
+                                                планируемое и фактическое
+                                            </a>
+                                        </li>
+                                    </ul>
                                 @endif
                                 @if(Auth::user()->isEmployee())
+                                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-2 text-muted">
+                                        <span>Планер</span>
+                                    </h6>
                                     <li class="nav-item">
                                         <a class="nav-link {{ request()->is('tasks*') ? 'active' : '' }}" href="{{ route('tasks.index') }}">
-                                            <i class="fas fa-list"></i>
+                                            <i class="fas fa-list mr-2"></i>
                                             Мои задачи
                                         </a>
                                     </li>
                                 @endif
                             @endauth
+                            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-2 text-muted">
+                                <span>Помощь</span>
+                            </h6>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('help*') ? 'active' : '' }}" href="{{ route('help.index') }}">
-                                    <i class="fas fa-question-circle"></i>
+                                    <i class="fas fa-question-circle mr-2"></i>
                                     Помощь по системе
                                 </a>
                             </li>
