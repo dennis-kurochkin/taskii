@@ -26,6 +26,18 @@ class ProjectTasksController extends Controller
     }
 
     /**
+     * Display the task
+     */
+    public function show(Project $project, Task $task)
+    {
+        return view('projects.tasks.show', [
+            'title' => $task->title,
+            'project' => $project,
+            'task' => $task
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -106,7 +118,6 @@ class ProjectTasksController extends Controller
     /**
      * Validate a task
      */
-
     protected function validateTask()
     {
         return request()->validate([

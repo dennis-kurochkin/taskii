@@ -37,4 +37,12 @@ class TasksController extends Controller
 
         return redirect()->route('tasks.index');
     }
+
+    public function show(Task $task)
+    {
+        return view('tasks.show', [
+            'title' => $task->title,
+            'task' => $task
+        ]);
+    }
 }

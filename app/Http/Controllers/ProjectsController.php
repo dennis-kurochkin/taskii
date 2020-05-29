@@ -46,20 +46,6 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Project $project)
-    {
-        return view('projects.show', [
-            'title' => 'Проект',
-            'project' => $project
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Project  $project
@@ -68,7 +54,7 @@ class ProjectsController extends Controller
     public function edit(Project $project)
     {
         return view('projects.edit', [
-            'title' => "Редактировать проект \"{$project->title}\"",
+            'title' => "{$project->title}",
             'project' => $project
         ]);
     }
