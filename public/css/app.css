@@ -10931,3 +10931,36 @@ a.text-dark:focus {
   }
 }
 
+@media print {
+@page {
+    size: landscape;
+    margin: 0;
+}
+
+  body {
+    margin: 1.4cm;
+    max-width: 100%;
+  }
+
+  .main-print-container {
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem !important;
+  }
+
+  .table.table-bordered {
+    line-height: 1.4 !important;
+  }
+
+  h2 br,
+  .h2 br {
+    display: none !important;
+  }
+}
+

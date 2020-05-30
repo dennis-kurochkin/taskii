@@ -72,7 +72,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-4 col-lg-3 d-md-block bg-light sidebar collapse">
+                <nav id="sidebarMenu" class="col-md-4 col-lg-3 d-md-block bg-light sidebar collapse d-print-none">
                     <div class="sidebar-sticky pt-3">
                         <ul class="nav flex-column">
                             @auth
@@ -112,23 +112,32 @@
                                     </h6>
                                     <ul class="nav flex-column mb-2">
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex" href="#">
+                                            <a
+                                                class="nav-link d-flex
+                                                    {{ request()->get('report') == 1 ? 'active' : '' }}"
+                                                href="{{ route('reports.index') }}?report=1">
                                                 <i class="fas fa-file-alt mt-1 mr-2"></i>
                                                 Незавершенные задачи,<br>
                                                 затянувшиеся по срокам
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex" href="#">
+                                            <a
+                                                class="nav-link d-flex
+                                             {{ request()->get('report') == 2 ? 'active' : '' }}"
+                                                href="{{ route('reports.index') }}?report=2">
                                                 <i class="fas fa-file-alt mt-1 mr-2"></i>
                                                 Задачи, завершенные<br>
                                                 на этой неделе
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex" href="#">
+                                            <a
+                                                class="nav-link d-flex
+                                             {{ request()->get('report') == 3 ? 'active' : '' }}"
+                                                href="{{ route('reports.index') }}?report=3">
                                                 <i class="fas fa-file-alt mt-1 mr-2"></i>
-                                                Завершение задач:<br>
+                                                Завершение задач за месяц:<br>
                                                 планируемое и фактическое
                                             </a>
                                         </li>
@@ -158,13 +167,16 @@
                         </ul>
                     </div>
                 </nav>
-                <main role="main" class="col-md-8 ml-sm-auto col-lg-9 pb-5 px-md-4">
+                <main role="main" class="col-md-8 ml-sm-auto col-lg-9 pb-5 px-md-4 main-print-container">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">{!! $title ?? '' !!}</h1>
-                        <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-toolbar mb-2 mb-md-0 d-print-none">
                             <div class="btn-group mr-2">
                                 @auth
                                     @if(Auth::user()->isManager())
+                                        @if(request()->is('reports*'))
+                                            <a href="javascript:window.print()" class="btn btn-sm btn-outline-secondary">Печать</a>
+                                        @endif
                                         @if(isset($project) && !isset($projects))
                                             <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-outline-secondary">Добавить задачу для проекта</a>
                                         @endif

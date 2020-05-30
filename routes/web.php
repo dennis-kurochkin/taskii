@@ -42,6 +42,9 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/stats', 'StatsController@index')
         ->name('stats.index');
 
+    Route::get('/reports', 'ReportsController@index')
+        ->name('reports.index');
+
     Route::get('/projects', 'ProjectsController@index')
         ->name('projects.index');
     Route::post('/projects', 'ProjectsController@store')
