@@ -160,7 +160,7 @@
                 </nav>
                 <main role="main" class="col-md-8 ml-sm-auto col-lg-9 pb-5 px-md-4">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                        <h1 class="h2">{{ $title ?? '' }}</h1>
+                        <h1 class="h2">{!! $title ?? '' !!}</h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <div class="btn-group mr-2">
                                 @auth
@@ -183,8 +183,6 @@
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-
-        @yield('head')
 
 </body>
 

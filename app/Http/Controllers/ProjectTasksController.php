@@ -18,7 +18,7 @@ class ProjectTasksController extends Controller
     public function index(Project $project)
     {
         return view('projects.tasks.index', [
-            'title' => "Задачи проекта {$project->title}",
+            'title' => "{$project->title}",
             'project' => $project,
             'tasks' => $project->tasks
                 ->sortBy('completed_at')
@@ -45,7 +45,7 @@ class ProjectTasksController extends Controller
     public function create(Project $project)
     {
         return view('projects.tasks.create', [
-            'title' => "Добавить задачу для проекта {$project->title}",
+            'title' => "{$project->title}<br>Добавить задачу",
             'project' => $project,
             'users' => User::where('role', 'employee')->get()
         ]);
