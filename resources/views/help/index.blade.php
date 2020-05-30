@@ -2,12 +2,58 @@
 
 @section('content')
 
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa eius cumque officia necessitatibus tenetur at, impedit iste incidunt. Praesentium vitae quam ducimus laudantium. Suscipit, id! Maiores, velit corporis. Nulla, eligendi. Consectetur repudiandae magni quibusdam temporibus nostrum vitae, exercitationem natus porro at, impedit sequi, animi maiores sed ex! Numquam, eum aliquid.</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quidem eum voluptatum optio exercitationem aperiam sequi adipisci illo? Accusantium dicta temporibus maiores quam fugiat illo amet sapiente, ratione deleniti quos, cum earum minima consequatur distinctio. Harum tenetur aperiam corrupti consectetur voluptates molestiae quae a quos, maiores illo perferendis at porro, rerum eius. Est distinctio doloribus a cum optio dignissimos, quaerat temporibus, ad labore quibusdam minus incidunt nulla, aspernatur atque maiores nesciunt ab? Officiis ratione esse tempore, maiores facere vitae architecto hic eos, fugiat iste ducimus quod totam beatae aut quia fuga nesciunt corporis! Temporibus sit nobis commodi ipsum excepturi quaerat?</p>
-<ol>
-    <li>Lorem ipsum dolor sit amet.</li>
-    <li>Lorem ipsum dolor sit amet consectetur.</li>
-    <li>Lorem, ipsum dolor.</li>
-</ol>
+@if(Auth::user()->isAdmin())
+    <h4>Как просмотреть список пользователей?</h4>
+    <p>Чтобы просмотреть список пользователей, вам необходимо перейти по ссылке "Пользователи" в левом меню.</p>
+    <hr>
+    <h4>Как добавить пользователя?</h4>
+    <p>Чтобы добавить проект, нажмите кнопку "Добавить пользователя" в правом верхнем углу и заполните форму.</p>
+    <img src="{{ url('/images/help/40.png') }}" class="img-fluid" alt="Image" />
+    <hr>
+    <h4>Как изменить или удалить пользователя?</h4>
+    <p>Чтобы сделать это, перейдите в список пользователей и нажмите на кнопку "Изменить" или "Удалить".</p>
+@endif
+
+@if(Auth::user()->isManager())
+    <h4>Как просмотреть аналитику?</h4>
+    <p>Чтобы просмотреть аналитику, вам необходимо перейти по ссылке "Аналитика" в левом меню.</p>
+    <hr>
+    <h4>Как посмотреть список проектов?</h4>
+    <p>Чтобы просмотреть список проектов, вам необходимо перейти по ссылке "Проекты" в левом меню.</p>
+    <hr>
+    <h4>Как добавить проект?</h4>
+    <p>Чтобы добавить проект, нажмите кнопку "Добавить проект" в правом верхнем углу и заполните форму.</p>
+    <img src="{{ url('/images/help/10.png') }}" class="img-fluid" alt="Image" />
+    <hr>
+    <h4>Как добавить задачу?</h4>
+    <p>Чтобы добавить задачу, выберите в списке проект, нажмите кнопку "Добавить задачу" и заполните форму.</p>
+    <img src="{{ url('/images/help/20.png') }}" class="img-fluid" alt="Image" />
+    <hr>
+    <h4>Как я могу управлять задачами?</h4>
+    <p>Чтобы управлять задачами проекта, перейдите в список проектов, выберите проект и нажмите кнопку "Управление задачами".</p>
+    <hr>
+    <h4>Как я могу изменить или удалить задачу или проект?</h4>
+    <p>Чтобы сделать это, перейдите в список проектов или задач, и нажмите на кнопку "Изменить" или "Удалить".</p>
+    <hr>
+    <h4>Как я могу просмотреть отчеты?</h4>
+    <p>Выберите один из отчетов в левом меню и перейдите по ссылке.</p>
+    <img src="{{ url('/images/help/30.png') }}" class="img-fluid" alt="Image" />
+@endif
+
+@if(Auth::user()->isEmployee())
+    <h4>Как просмотреть список назначенных мне задач?</h4>
+    <p>Чтобы просмотреть список назначенных вам задач, вам необходимо перейти по ссылке "Мои задачи" в левом меню.</p>
+    <hr>
+    <h4>Как пометить задачу выполненной?</h4>
+    <p>Чтобы пометить задачу выполненной, необходимо нажать на представленную ниже кнопку слева от задачи.</p>
+    <img src="{{ url('/images/help/50.png') }}" class="img-fluid" alt="Image" />
+    <hr>
+    <h4>Как просмотреть детали задачи?</h4>
+    <p>Чтобы просмотреть детали задачи, нажмите на кнопку "Подробнее" справа от задачи.</p>
+    <hr>
+    <h4>Как прокомментировать задачу?</h4>
+    <p>Чтобы прокомментировать задачу, вам необходимо заполнить форму ниже и отправить ее.</p>
+    <img src="{{ url('/images/help/60.png') }}" class="img-fluid" alt="Image" />
+@endif
 
 @endsection
