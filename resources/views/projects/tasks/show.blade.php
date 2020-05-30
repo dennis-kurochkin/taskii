@@ -4,6 +4,6 @@
 
 @include('components.task.show')
 
-<a href="{{ route('tasks.index') }}" class="btn btn-lg btn-danger">Назад</a>
+<a href="{{ route('projects.tasks.index', $project) }}" class="btn btn-lg btn-danger">Назад</a>
 
 @endsection
